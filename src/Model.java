@@ -3,7 +3,8 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 public class Model {
-	public boolean[][] board;
+	
+	private boolean[][] board;
 
 	public Model() {
 		board = new boolean[50][50];
@@ -19,29 +20,29 @@ public class Model {
 		}
 	}
 
-	public void evolving() {
+	public void evolve() {
 		for (int i = 0; i < 50; i++) {
 			for (int j = 0; j < 50; j++) {
-				int amountOfNeighbours = amountOfLiveNeighbours(i, j);
-
-				if (board[i][j]) {
-					amountOfNeighbours--;
-					if (amountOfNeighbours < 2 || amountOfNeighbours > 3) {
-						board[i][j] = false;
-					}
-
-				} else {
-					if (amountOfNeighbours == 3) {
-						board[i][j] = true;
-					}
-				}
+				board[i][j] = isCellStillAlive(i, j);
 			}
 		}
 	}
 
+	private boolean isCellStillAlive(int i, int j) {
+		int amountOfNeighbours = amountOfLiveNeighbours(i, j);
+
+		if (board[i][j]) {
+			amountOfNeighbours--;
+			return amountOfNeighbours >= 2 && amountOfNeighbours <= 3;
+		} else if (amountOfNeighbours == 3) {
+			return true;
+		}
+		
+		return false;
+	}
+
 	public int amountOfLiveNeighbours(int x, int y) {
 		int liveNeighbours = 0;
-
 		for (int i = x - 1; i < x + 1; i++) {
 			for (int j = y - 1; j < y + 1; j++) {
 				if (outOfBounds(i)) {
@@ -62,17 +63,9 @@ public class Model {
 		return true;
 		
 	}
-	
-	public void paintingCells(Graphics2D canvas) {
-		for (int i = 0; i < 50; i++) {
-			for (int j = 0; j < 50; j++) {
-				canvas.setColor(new Color(0, 0, 0));
-				if (board[i][j]) {
-					canvas.setColor(new Color(68, 89, 110));
-				}
 
-				canvas.fillRect(i * 10, j * 10, 10, 10);
-			}
-		}
+	public boolean[][] getBoard() {
+		return board;
 	}
+	
 }
