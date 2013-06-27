@@ -8,15 +8,22 @@ import java.awt.image.BufferStrategy;
 
 public class View extends Canvas {
 	Model model;
-	private BufferStrategy strategy;
+	private BufferStrategy displayBuffer;
 
 	public View() {
 		model = new Model();
+		createWindow(500,500);
+		createBufferStrategy(2);
+		displayBuffer = getBufferStrategy();
+		updatingDisplayBuffer();
+	}
+	
+	public void createWindow(int x, int y){
 		Frame frame = new Frame();
 		frame.setLayout(null);
-		setBounds(0, 0, 500, 500);
+		setBounds(0, 0, x, y);
 		frame.add(this, BorderLayout.CENTER);
-		frame.setSize(500, 500);
+		frame.setSize(x, y);
 		frame.setResizable(false);
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -24,19 +31,16 @@ public class View extends Canvas {
 			}
 		});
 		frame.setVisible(true);
-		createBufferStrategy(2);
-		strategy = getBufferStrategy();
-		play();
 	}
 
-	public void play() {
+	public void updatingDisplayBuffer() {
 		while (true) {
-			Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
+			Graphics2D g = (Graphics2D) displayBuffer.getDrawGraphics();
 			g.translate(0, 0);
-			model.paint(g);
+			model.paintingCells(g);
 			g.dispose();
-			strategy.show();
-			model.play();
+			displayBuffer.show();
+			model.evolving();
 			try {
 				Thread.sleep(40);
 			} catch (Exception e) {
