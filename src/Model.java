@@ -44,8 +44,8 @@ public class Model {
 
 		for (int i = x - 1; i < x + 1; i++) {
 			for (int j = y - 1; j < y + 1; j++) {
-				if (i > 0 && i < 50) {
-					if (j > 0 && j < 50) {
+				if (outOfBounds(i)) {
+					if (outOfBounds(j)) {
 						liveNeighbours += board[i][j] ? 1 : 0;
 					}
 				}
@@ -53,7 +53,16 @@ public class Model {
 		}
 		return liveNeighbours;
 	}
-
+	
+	//decomposed contidional or should it be a inline method
+	public boolean outOfBounds(int i){
+		if(i>=50 || i<0){
+			return false;
+		}
+		return true;
+		
+	}
+	
 	public void paintingCells(Graphics2D canvas) {
 		for (int i = 0; i < 50; i++) {
 			for (int j = 0; j < 50; j++) {

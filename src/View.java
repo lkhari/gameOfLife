@@ -34,7 +34,7 @@ public class View extends Canvas {
 	}
 
 	public void updatingDisplayBuffer() {
-		while (true) {
+		for(;;) {
 			Graphics2D g = (Graphics2D) displayBuffer.getDrawGraphics();
 			g.translate(0, 0);
 			model.paintingCells(g);
@@ -43,9 +43,7 @@ public class View extends Canvas {
 			model.evolving();
 			try {
 				Thread.sleep(40);
-			} catch (Exception e) {
-			}
-			;
+			} catch (Exception e) {}
 		}
 	}
 
