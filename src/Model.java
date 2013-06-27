@@ -45,10 +45,8 @@ public class Model {
 		int liveNeighbours = 0;
 		for (int i = x - 1; i < x + 1; i++) {
 			for (int j = y - 1; j < y + 1; j++) {
-				if (outOfBounds(i)) {
-					if (outOfBounds(j)) {
+				if (outOfBounds(i,j)) {
 						liveNeighbours += board[i][j] ? 1 : 0;
-					}
 				}
 			}
 		}
@@ -56,11 +54,10 @@ public class Model {
 	}
 	
 	//decomposed contidional or should it be a inline method
-	public boolean outOfBounds(int i){
-		if(i>=50 || i<0){
-			return false;
-		}
-		return true;
+	public boolean outOfBounds(int i, int j){
+		if(j<50 && j>=0)
+			return i<50 && i>=0;
+		return false;
 		
 	}
 
