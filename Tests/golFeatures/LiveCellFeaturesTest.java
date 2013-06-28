@@ -39,5 +39,46 @@ public class LiveCellFeaturesTest {
 		assertTrue("Cell 1,1 should Still live", game.isCellAlive(1, 1));
 		
 	}
+	
+	@Test
+	public void livingCellWithThreeNeighbourLives(){
+		//given
+		boolean[][] board=new boolean[3][3];
+		board[1][1] = true;
+		
+		board[0][1]=true;
+		board[1][2]=true;
+		board[1][0]=true;
+		
+		Game game = new Game(board);
+		
+		//when 
+		game.evolve();
+		
+		//then
+		assertTrue("Cell 1,1 should Still live", game.isCellAlive(1, 1));
+		
+	}
+	
+	@Test
+	public void livingCellWithFourNeighbourDies(){
+		//given
+		boolean[][] board=new boolean[3][3];
+		board[1][1] = true;
+		
+		board[0][1]=true;
+		board[1][2]=true;
+		board[1][0]=true;
+		board[2][1]=true;
+		
+		Game game = new Game(board);
+		
+		//when 
+		game.evolve();
+		
+		//then
+		assertFalse("Cell 1,1 should die", game.isCellAlive(1, 1));
+		
+	}
 
 }
