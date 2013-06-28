@@ -16,7 +16,6 @@ public class View extends Canvas {
 		createClosableWindow(500,500);
 		createBufferStrategy(2);
 		displayBuffer = getBufferStrategy();
-		picture = (Graphics2D) displayBuffer.getDrawGraphics();
 	}
 	
 	public void createClosableWindow(int x, int y){
@@ -35,6 +34,7 @@ public class View extends Canvas {
 	}
 
 	public void renderCells(boolean[][] cells) {
+		picture = (Graphics2D) displayBuffer.getDrawGraphics();
 		picture.translate(0, 0);
 		
 		for (int i = 0; i < 50; i++) {

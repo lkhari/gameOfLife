@@ -1,5 +1,3 @@
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.util.Random;
 
 public class Model {
@@ -30,15 +28,11 @@ public class Model {
 
 	private boolean isCellStillAlive(int i, int j) {
 		int amountOfNeighbours = amountOfLiveNeighbours(i, j);
-
 		if (board[i][j]) {
 			amountOfNeighbours--;
 			return amountOfNeighbours >= 2 && amountOfNeighbours <= 3;
-		} else if (amountOfNeighbours == 3) {
-			return true;
 		}
-		
-		return false;
+		return amountOfNeighbours == 3;
 	}
 
 	public int amountOfLiveNeighbours(int x, int y) {
@@ -58,7 +52,6 @@ public class Model {
 		if(j<50 && j>=0)
 			return i<50 && i>=0;
 		return false;
-		
 	}
 
 	public boolean[][] getBoard() {
