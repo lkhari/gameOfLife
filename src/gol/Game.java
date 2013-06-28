@@ -14,10 +14,14 @@ public class Game {
 				if(board[i][j]) amountOfLiveNeighbours++;
 			}
 		}
+		if(board[1][1]){
 		if(amountOfLiveNeighbours-1==3 || amountOfLiveNeighbours-1==2){
 			board[1][1]=true;
 		}else{
 			board[1][1]=false;
+		}
+		}else if(amountOfLiveNeighbours==3){
+			board[1][1]=true;
 		}
 	}
 
