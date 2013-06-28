@@ -8,23 +8,28 @@ public class Game {
 	}
 
 	public void evolve() {
-		int amountOfLiveNeighbours=0;
-		for(int j=0;j<board[0].length;j++){
-			for(int i=0;i<board.length;i++){
-				if(board[i][j]) amountOfLiveNeighbours++;
-			}
-		}
-		if(board[1][1]){
-		if(amountOfLiveNeighbours-1==3 || amountOfLiveNeighbours-1==2){
-			board[1][1]=true;
-		}else{
-			board[1][1]=false;
-		}
-		}else if(amountOfLiveNeighbours==3){
-			board[1][1]=true;
-		}
+				board[1][1] = updateCellLife(1, 1);
 	}
 
+	private boolean updateCellLife(int i, int j) {
+		int amountOfNeighbours = amountOfLiveNeighbours(i, j);
+		if (board[i][j]) {
+			amountOfNeighbours--;
+			return amountOfNeighbours >= 2 && amountOfNeighbours <= 3;
+		}
+		return amountOfNeighbours == 3;
+	}
+	
+	public int amountOfLiveNeighbours(int x, int y) {
+		int liveNeighbours = 0;
+		for (int j = 0; j < board.length; j++) {
+			for (int i =0; i < board[0].length; i++) {
+					liveNeighbours += board[i][j] ? 1 : 0;
+			}
+		}
+		return liveNeighbours;
+	}
+	
 	public boolean isCellAlive(int i, int j) {
 		return board[i][j];
 	}
