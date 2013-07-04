@@ -1,6 +1,7 @@
 package golFeatures;
 
 import static org.junit.Assert.*;
+import gol.Board;
 import gol.Game;
 
 import org.junit.Test;
@@ -10,10 +11,10 @@ public class LiveCellFeaturesTest {
 	@Test
 	public void livingCellWithZeroNeighboursDies() {
 	    //given
-	    boolean[][] board= new boolean[3][3];
-	    board[1][1]=true;
+	    Board board= new Board(3, 3);
+	    board.rows[1][1]=true;
 	    
-	    Game game = new Game(board);
+	    Game game = new Game(board.rows);
 		//when
 	    game.evolve();
 	    
@@ -24,13 +25,13 @@ public class LiveCellFeaturesTest {
 	@Test
 	public void livingCellWithTwoNeighbourLives(){
 		//given
-		boolean[][] board=new boolean[3][3];
-		board[1][1] = true;
+		Board board=new Board(3, 3);
+		board.rows[1][1] = true;
 		
-		board[0][1]=true;
-		board[1][2]=true;
+		board.rows[0][1]=true;
+		board.rows[1][2]=true;
 		
-		Game game = new Game(board);
+		Game game = new Game(board.rows);
 		
 		//when 
 		game.evolve();
@@ -43,14 +44,14 @@ public class LiveCellFeaturesTest {
 	@Test
 	public void livingCellWithThreeNeighbourLives(){
 		//given
-		boolean[][] board=new boolean[3][3];
-		board[1][1] = true;
+		Board board=new Board(3, 3);
+		board.rows[1][1] = true;
 		
-		board[0][1]=true;
-		board[1][2]=true;
-		board[1][0]=true;
+		board.rows[0][1]=true;
+		board.rows[1][2]=true;
+		board.rows[1][0]=true;
 		
-		Game game = new Game(board);
+		Game game = new Game(board.rows);
 		
 		//when 
 		game.evolve();
@@ -63,15 +64,15 @@ public class LiveCellFeaturesTest {
 	@Test
 	public void livingCellWithFourNeighbourDies(){
 		//given
-		boolean[][] board=new boolean[3][3];
-		board[1][1] = true;
+		Board board=new Board(3, 3);
+		board.rows[1][1] = true;
 		
-		board[0][1]=true;
-		board[1][2]=true;
-		board[1][0]=true;
-		board[2][1]=true;
+		board.rows[0][1]=true;
+		board.rows[1][2]=true;
+		board.rows[1][0]=true;
+		board.rows[2][1]=true;
 		
-		Game game = new Game(board);
+		Game game = new Game(board.rows);
 		
 		//when 
 		game.evolve();

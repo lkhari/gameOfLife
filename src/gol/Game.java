@@ -1,6 +1,7 @@
 package gol;
 
 public class Game {
+
 	private boolean[][] board;
 	private boolean[][] prevBoardState;
 
