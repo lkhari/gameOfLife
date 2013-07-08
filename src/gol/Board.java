@@ -1,12 +1,21 @@
 package gol;
 
 public class Board {
-	
-	// TODO make private, no getters!
-	public boolean[][] rows;
-	
-	public Board(int width, int height) {
-		rows = new boolean[height][width];
+
+	private Row[] rows;
+
+	public Board(Row[] rows) {
+		this.rows = rows;
+	}
+
+	public void evolve() {
+		for (Row row : rows) {
+			row.evolve();
+		}
+	}
+
+	public boolean isCellAlive(int x, int y) {
+		return rows[y].isCellAlive(x);
 	}
 
 }

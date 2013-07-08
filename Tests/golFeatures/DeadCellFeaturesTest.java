@@ -1,7 +1,6 @@
 package golFeatures;
 
 import static org.junit.Assert.*;
-import gol.Board;
 import gol.Game;
 
 import org.junit.Test;
@@ -11,9 +10,10 @@ public class DeadCellFeaturesTest {
 	@Test
 	public void DeadgCellWithZeroNeighboursDies() {
 	    //given
-	    Board board= new Board(3, 3);
+		boolean[][] initialState = new boolean[3][3];
 	    
-	    Game game = new Game(board.rows);
+	    Game game = new Game(new BoardBuilder(initialState).build());
+
 		//when
 	    game.evolve();
 	    
@@ -24,12 +24,12 @@ public class DeadCellFeaturesTest {
 	@Test
 	public void deadCellWithTwoNeighbourDies(){
 		//given
-		Board board=new Board(3, 3);
+		boolean[][] initialState = new boolean[3][3];
 
-		board.rows[0][1]=true;
-		board.rows[1][2]=true;
+		initialState[0][1]=true;
+		initialState[1][2]=true;
 		
-		Game game = new Game(board.rows);
+		Game game = new Game(new BoardBuilder(initialState).build());
 		
 		//when 
 		game.evolve();
@@ -42,13 +42,13 @@ public class DeadCellFeaturesTest {
 	@Test
 	public void deadCellWithThreeNeighbourLives(){
 		//given
-		Board board=new Board(3, 3);
+		boolean[][] initialState = new boolean[3][3];
 		
-		board.rows[0][1]=true;
-		board.rows[1][2]=true;
-		board.rows[1][0]=true;
+		initialState[0][1]=true;
+		initialState[1][2]=true;
+		initialState[1][0]=true;
 		
-		Game game = new Game(board.rows);
+		Game game = new Game(new BoardBuilder(initialState).build());
 		
 		//when 
 		game.evolve();
@@ -61,14 +61,14 @@ public class DeadCellFeaturesTest {
 	@Test
 	public void DeadCellWithFourNeighbourDies(){
 		//given
-		Board board=new Board(3, 3);
+		boolean[][] initialState = new boolean[3][3];
 		
-		board.rows[0][1]=true;
-		board.rows[1][2]=true;
-		board.rows[1][0]=true;
-		board.rows[2][1]=true;
+		initialState[0][1]=true;
+		initialState[1][2]=true;
+		initialState[1][0]=true;
+		initialState[2][1]=true;
 		
-		Game game = new Game(board.rows);
+		Game game = new Game(new BoardBuilder(initialState).build());
 		
 		//when 
 		game.evolve();

@@ -4,23 +4,22 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import gol.Board;
 import gol.Game;
 
 public class MultipleCellsFeature {
 
 	@Test
 	public void sparseGridWithNoSurvivors() {
-
 		//given
-		Board board= new Board(5, 5);
+		boolean[][] initialState = new boolean[5][5];
 		
-		board.rows[1][1]=true;
-		board.rows[1][3]=true;
-		board.rows[3][1]=true;
-		board.rows[3][3]=true;
+		initialState[1][1]=true;
+		initialState[1][3]=true;
+		initialState[3][1]=true;
+		initialState[3][3]=true;
 		
-		Game game= new Game(board.rows);
+		Game game= new Game(new BoardBuilder(initialState).build());
+
 		//when
 		game.evolve();
 		
