@@ -18,4 +18,8 @@ public class Row {
 		return cellClusters[x].isCentreOfClusterAlive();
 	}
 
+	public void addCellStateListener(int x, CellStateListener listener) {
+		cellClusters[x].addListener(listener);
+	}
+
 }

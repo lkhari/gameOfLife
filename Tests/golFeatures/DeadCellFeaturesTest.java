@@ -1,6 +1,7 @@
 package golFeatures;
 
 import static org.junit.Assert.*;
+import gol.Board;
 import gol.Game;
 
 import org.junit.Test;
@@ -12,13 +13,13 @@ public class DeadCellFeaturesTest {
 	    //given
 		boolean[][] initialState = new boolean[3][3];
 	    
-	    Game game = new Game(new BoardBuilder(initialState).build());
-
-		//when
-	    game.evolve();
+	    Board board = new BoardBuilder(initialState).build();
 	    
-	    //then
-	    assertFalse("This Cell should be dead",game.isCellAlive(1,1));
+	    board.addCellStateListener(1, 1, new ExpectCellToDie());
+	    
+		//when
+	    board.evolve();
+	    //then listener is satisfied
 	}
 	
 	@Test

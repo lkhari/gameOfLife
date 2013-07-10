@@ -13,6 +13,10 @@ public class Board {
 			row.evolve();
 		}
 	}
+	
+	public void addCellStateListener(int x, int y, CellStateListener listener) {
+		rows[y].addCellStateListener(x, listener);
+	}
 
 	public boolean isCellAlive(int x, int y) {
 		return rows[y].isCellAlive(x);
